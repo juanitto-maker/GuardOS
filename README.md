@@ -1,3 +1,5 @@
+[![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://paypal.me/guardOS)
+
 # GuardOS — AI‑Armored Personal Operating System (Open Source)
 
 **GuardOS** hardens an individual computer (“cell”) using a layered (Onion) model:
