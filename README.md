@@ -60,7 +60,8 @@ We're building GuardOS together — your input is welcome!
 
 > 💡 For bug reports or technical issues, please use [Issues](https://github.com/juanitto-maker/GuardOS/issues).
 
-![Security](https://img.shields.io/badge/security-GitHub%20Advanced-blue?logo=github)
+[![Security](https://img.shields.io/badge/security-GitHub%20Advanced-blue?logo=github)](../../security/policy)
+
 
 
 ## License
