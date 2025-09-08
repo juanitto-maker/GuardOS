@@ -720,7 +720,7 @@ Absolutely. Here’s the expanded hardware section, giving readers a clear compa
 
 - *Coreboot status page* — check model-level support regularly.
 - *Libreboot’s hardware page* — lists fully libre-supported systems, mostly old ThinkPads & EliteBooks 9.
-
+  https://libreboot.org/docs/install/#thinkpads
 ---
 
 This gives contributors clear guidance: whether for initial X230-based development, modern specs with T480, or alternative devices for specific builds. Let me know when you’d like **Chunk 8** — covering app strategy, GUI profiles (Guess, Sway/Wayland), or the Guard Panel details!10
