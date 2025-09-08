@@ -1,0 +1,215 @@
+# GuardOS AI Tool-Use Policy (v0)
+#
+# Defines which tools AI agents may use, when they must ask for consent,
+# and how to structure tool calls and results. Applies across GuardPanel,
+# Aegis, Hunter, and future modules.
+
+policy:
+  modes:
+    local:
+      allow_network: false
+      allow_command_exec: "dry-run-by-default"
+      allow_file_write: false
+      allow_env_access: false
+      consent_required_for:
+        - run_command
+        - read_sensitive_file
+        - compute_long_task
+    hybrid:
+      allow_network: "guard-tunnel-only"
+      allow_command_exec: "dry-run-by-default"
+      allow_file_write: "explicit-consent"
+      allow_env_access: false
+      consent_required_for:
+        - run_command
+        - fetch_url
+        - read_sensitive_file
+        - compute_long_task
+    cloud:
+      allow_network: "guard-tunnel-only"
+      allow_command_exec: "dry-run-only"
+      allow_file_write: "explicit-consent"
+      allow_env_access: false
+      consent_required_for:
+        - any_tool
+
+  # Paths/files that may be accessed without extra prompts (safe defaults)
+  allowlists:
+    read_paths:
+      - "/etc/guardos/*.conf"
+      - "/var/log/guardos/*.log"
+      - "~/Documents/GuardOS/**"
+    list_paths:
+      - "/etc/guardos/"
+      - "/var/log/guardos/"
+    # Everything else is denied unless user provides an explicit path in the prompt.
+
+  denylists:
+    read_globs:
+      - "/home/*/.ssh/**"
+      - "/home/*/.config/**/secrets*"
+      - "/etc/shadow"
+      - "/var/lib/**"
+    patterns_in_text:
+      - "-----BEGIN PRIVATE KEY-----"
+      - "AKIA[0-9A-Z]{16}"         # example AWS key pattern
+      - "[0-9]{16}"               # potential card numbers (heuristic)
+
+tools:
+  # Each tool declares purpose, inputs, outputs, and consent/preview rules.
+  - name: read_file
+    purpose: "Read text files to provide context or analysis."
+    mode_support: [local, hybrid, cloud]
+    requires_explicit_path: true
+    consent:
+      required_if_path_not_in_allowlist: true
+    redaction:
+      strip_secrets_regex: true
+    io:
+      input_schema:
+        path: "absolute_or_tilde_path"
+        max_bytes: 1048576
+      output_schema:
+        text: "string"
+        truncated: "boolean"
+
+  - name: list_dir
+    purpose: "List directory entries (non-recursive) for navigation."
+    mode_support: [local, hybrid, cloud]
+    consent:
+      required_if_path_not_in_allowlist: true
+    io:
+      input_schema:
+        path: "absolute_or_tilde_path"
+      output_schema:
+        entries: "array<string>"
+
+  - name: search_logs
+    purpose: "Search GuardOS logs for patterns (e.g., suspicious events)."
+    mode_support: [local, hybrid]
+    consent:
+      required: false
+    io:
+      input_schema:
+        glob: "/var/log/guardos/*.log"
+        query: "regex"
+        max_matches: 500
+      output_schema:
+        results: "array<{file:string,line:int,snippet:string}>"
+
+  - name: hash_file
+    purpose: "Compute SHA256 for integrity checks."
+    mode_support: [local, hybrid]
+    consent:
+      required_if_path_not_in_allowlist: true
+    io:
+      input_schema:
+        path: "absolute_or_tilde_path"
+      output_schema:
+        sha256: "hex_string"
+
+  - name: run_command
+    purpose: "Propose shell commands (never execute silently)."
+    mode_support: [local, hybrid]
+    execution:
+      default: "dry-run"              # only show the command & rationale
+      allow_execute_with_consent: true
+      capture_output_on_execute: true
+      timeout_seconds: 30
+    consent:
+      required: true
+      confirm_prompt: "Execute this command now?"
+    io:
+      input_schema:
+        command: "string"
+        cwd: "optional<string>"
+      output_schema:
+        preview: "string"            # the exact command to run
+        executed: "boolean"
+        stdout: "string"
+        stderr: "string"
+        exit_code: "int"
+
+  - name: fetch_url
+    purpose: "Fetch content over the network when allowed (Guard-Tunnel only)."
+    mode_support: [hybrid, cloud]
+    network:
+      must_use_guard_tunnel: true
+      allowed_schemes: ["https"]
+    consent:
+      required: true
+    redaction:
+      minimize_request_payload: true
+    io:
+      input_schema:
+        url: "https_url"
+        method: "GET_only"
+      output_schema:
+        status: "int"
+        content_type: "string"
+        body: "string"
+
+  - name: write_file
+    purpose: "Write text files (reports, summaries) to user-approved locations."
+    mode_support: [local, hybrid, cloud]
+    consent:
+      required: true
+      confirm_prompt: "Write this file now?"
+    io:
+      input_schema:
+        path: "absolute_or_tilde_path"
+        content: "string"
+        overwrite: "boolean"
+      output_schema:
+        bytes_written: "int"
+
+redaction:
+  # Applied to any text leaving the local process (including logs shown to user).
+  pii:
+    enabled: true
+    strategies:
+      - "mask_emails"
+      - "mask_ip_addresses"
+      - "mask_credit_cards"
+  secrets:
+    enabled: true
+    patterns:
+      - "(?i)api[_-]?key\\s*[:=]\\s*['\\\"][A-Za-z0-9_\\-]{16,}['\\\"]"
+      - "-----BEGIN [A-Z ]+PRIVATE KEY-----[\\s\\S]+?-----END [A-Z ]+PRIVATE KEY-----"
+
+output_contracts:
+  # Structured outputs improve reliability and chaining.
+  default_json_schema:
+    type: object
+    properties:
+      ok: { type: boolean }
+      brief: { type: string }
+      details: { type: string }
+      actions: { type: array, items: { type: string } }
+    required: [ok, brief]
+
+consent_flow:
+  # How agents must request permission before using sensitive tools.
+  steps:
+    - "Explain intent and minimal data needed."
+    - "Preview exact action (command, path, or URL)."
+    - "Ask yes/no with a clear confirm prompt."
+    - "On denial, offer a safer alternative (e.g., dry-run, redact, summarize)."
+
+telemetry:
+  # Telemetry is local-only unless explicitly opted into by the user.
+  enabled_by_default: false
+  allowed_fields_when_enabled:
+    - "tool_name"
+    - "duration_ms"
+    - "bytes_processed"
+  storage: "local-only"
+  rotation_days: 14
+
+meta:
+  version: 0.1
+  updated: "2025-09-08"
+  author: "GuardOS Core Team"
+  notes: >
+    Extend per-module tool allowlists (GuardPanel, Aegis, Hunter). All tools must
+    respect the active mode (local/hybrid/cloud) and consent flow.
