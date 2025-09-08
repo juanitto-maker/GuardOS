@@ -572,3 +572,106 @@ Yes. We can release:
 This way, we bring **Guard-like protections to any system**, even if they don’t run GuardOS fully.
 
 ---
+
+---
+
+## 🚀 SECTION 10 — Repository, Funding, Devices & First Steps
+
+**User:**  
+I want to launch (well, preparing I mean) on GitHub public repo: can you deliver the comprehensive set of doc files and the proposed repo structure?
+
+**Assistant:**  
+Yes. Here's a solid initial structure for `GuardOS` on GitHub:
+
+---
+
+## 📁 Proposed Repository Structure: `GuardOS`
+
+```plaintext
+GuardOS/
+├── .github/
+│   ├── ISSUE_TEMPLATE/
+│   └── workflows/
+├── docs/
+│   ├── GENESIS.md         # This conversation log (cleaned)
+│   ├── OVERVIEW.md        # What is GuardOS?
+│   ├── THREAT_MODEL.md    # Onion-layer security explanation
+│   ├── ARCHITECTURE.md    # Full system architecture
+│   ├── HARDWARE.md        # Supported devices + trust levels
+│   ├── COMPONENTS.md      # GuardPanel, SafeView, HunterMode, etc.
+│   ├── BUILD_GUIDE.md     # How to build GuardOS from flake
+│   └── FAQ.md             # New users FAQ
+├── flake.nix              # Nix-based build root
+├── guardos/               # Source code folder (split per module)
+│   ├── aegis/             # Local AI scanner/advisor
+│   ├── guardpanel/        # Live UI daemon
+│   ├── hunter/            # Attack detection/traps
+│   └── system/            # Kernel/OS configs & templates
+├── install/               # Install scripts, flasher, builder
+├── profiles/              # Home, Travel, Public WiFi, Audit mode
+├── LICENSE                # Probably AGPL or GPLv3
+├── CONTRIBUTING.md        # Invite for community builders
+├── README.md              # Welcome + install info
+└── SECURITY.md            # Coordinated disclosure policies
+```
+---
+
+**User:**  
+So, what would be the next steps of the project? How might the final repo with the code files look? When/where can I apply for funding & grants if possible?
+
+**Assistant:**
+
+---
+
+## ✅ GuardOS — Next Steps Roadmap
+
+### 🏁 PHASE 1: Public Genesis & Awareness
+- [x] Prepare cleaned `GENESIS.md`  
+- [x] Create GitHub repo (`GuardOS`)  
+- [ ] Push initial docs + architecture  
+- [ ] Invite early contributors (via Hacker News, Reddit r/privacy, Libera.chat)
+
+### 🏗️ PHASE 2: Minimal Viable System (X230 target)
+- [ ] Build `flake.nix` base  
+- [ ] Define base Nix modules (TPM, LUKS, eBPF, USBGuard)  
+- [ ] Port or write GuardPanel + Aegis shell UI  
+- [ ] First ISO image build (testable)
+
+### 🔐 PHASE 3: Hardened Features
+- [ ] Coreboot/Heads flash guide  
+- [ ] SafeView micro-VM sandbox  
+- [ ] Hunter mode, trap filesystem  
+- [ ] AI explainability feedback loop
+
+### 🛰️ PHASE 4: Extended Ecosystem
+- [ ] GuardOS‑R (router edition)  
+- [ ] GuardRouter hardware certs  
+- [ ] Minimal GuardBox image (appliance)  
+- [ ] Portable version (GuardOS-USB)
+
+### 🌍 PHASE 5: Outreach, Funding, Recognition
+- [ ] Apply for **NGI Zero** (EU), **NLnet**, **EFF Pioneer**, **Open Source Collective**  
+- [ ] Launch **OpenCollective / GitHub Sponsors**  
+- [ ] Publish on Product Hunt, HackerNews, IndieHackers  
+- [ ] Reach out to privacy orgs, dev communities, Linux Foundations
+
+---
+
+**User:**  
+Guess cannot start without a proper device?!? A secondhand Lenovo X or T?
+
+**Assistant:**  
+Correct — we need at least one **trusted development device**. For example:
+
+- ✅ ThinkPad X230 (Coreboot-compatible, TPM 1.2, ME removable)  
+- ⚠️ T480 or X270 (TPM2 but ME not removable — still usable)  
+- 🧪 Pinebook Pro (ARM64, open firmware, no ME)  
+- 🧠 Framework Laptop (modern, hackable, but higher price)
+
+You should ideally begin with **X230** — best balance of:
+- Price  
+- Coreboot/Heads support  
+- Linux compatibility  
+- Real-world threat modeling
+
+---
