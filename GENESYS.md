@@ -1,4 +1,4 @@
-# 🧬 GuardOS Genesis Log — Part 1 (Literal Transcript)
+# 🧬 GuardOS Genesis Log (Literal Transcript)
 
 **Compiled:** 2025-09-08 14:24 UTC  
 **Scope:** Full literal reconstruction of the origin discussion — user inputs spell-checked, sensitive info removed.  
@@ -40,14 +40,6 @@ Imagine a castle with 7 walls:
 
 Want me to turn this into a colorful image or infographic too?
 (Like a poster for kids — “The Onion of Computer Defense”?)
-
----
-
-**User:**  
-Heck yeah! An image of this would be a "spicy" thing to have, but if you make it do it nice like a poster for kids.
-
-**Assistant:**  
-[Image generated and included — layered onion poster with kid-friendly labels and metaphors] ✅
 
 ---
 
@@ -161,7 +153,7 @@ Move from **reaction-based security** (patch the attack vector after it lands) t
 
 ---
 
-## 🤖 SECTION 6 — Executive Board Pitch (Non-Technical)
+## 🤖 SECTION 1 — Executive Board Pitch (Non-Technical)
 
 **User:**  
 Now you (as chief security architect) make a comprehensive documentation for the company board (not experts), adding glossary explanations of terms, functions, processes, etc. from the concept above:  
@@ -250,7 +242,7 @@ By securing **each layer** individually and enforcing **cross-layer verification
 
 ---
 
-## ⚙️ SECTION 7 — Designing GuardOS from the Ground Up
+## ⚙️ SECTION 2 — Designing GuardOS from the Ground Up
 
 **User:**  
 Now let’s have our own company where I'm the president and you the chief of security, and I demand you to make a plan (and explain it to me) for a custom full embedded AI OS, named, say, GuardOS, which tackles automatically all the onion layers' vulnerabilities.
@@ -363,7 +355,7 @@ Create a next-gen operating system designed to **fully defend a personal computi
 
 ---
 
-## 📊 SECTION 8 — Competitive Comparison, Risk Forecast & Derivatives
+## 📊 SECTION 3 — Competitive Comparison, Risk Forecast & Derivatives
 
 **User:**  
 Ok, sounds good enough even though I'm not able to evaluate it entirely!  
@@ -432,7 +424,7 @@ Fantastic questions, Commander. Let's break them down point-by-point.
 
 ---
 
-## 🤔 SECTION 9 — Futureproofing, AI Audit, Open Source, Derivatives, and Monetization
+## 🤔 SECTION 4 — Futureproofing, AI Audit, Open Source, Derivatives, and Monetization
 
 **Assistant (continued):**
 
@@ -575,7 +567,7 @@ This way, we bring **Guard-like protections to any system**, even if they don’
 
 ---
 
-## 🚀 SECTION 10 — Repository, Funding, Devices & First Steps
+## 🚀 SECTION 5 — Repository, Funding, Devices & First Steps
 
 **User:**  
 I want to launch (well, preparing I mean) on GitHub public repo: can you deliver the comprehensive set of doc files and the proposed repo structure?
@@ -678,7 +670,7 @@ You should ideally begin with **X230** — best balance of:
 
 ---
 
-##  SECTION 11 — Hardware Compatibility Expansion
+##  SECTION 6 — Hardware Compatibility Expansion
 
 **User:**  
 Continue (but add some references or details about other suitable devices even though I chose X230 — it can still be useful for readers): T-series flagship T480, EliteBook, and maybe a table of which are compatible with Coreboot, and which with Libreboot.
@@ -728,7 +720,7 @@ This gives contributors clear guidance: whether for initial X230-based developme
 
 ---
 
-## 🔧 SECTION 12 — Device Selection: X230 Confirmed, Other Devices Compared
+## 🔧 SECTION 7 — Device Selection: X230 Confirmed, Other Devices Compared
 
 **User:**  
 I found a X230 secondhand but didn't list the specs: can you tell me what specs we need to confirm if it's what I need?
@@ -810,7 +802,7 @@ Say **“Continue literal genesis part 1 (chunk 8)”** when ready — next we'l
 
 ---
 
-## 🧩 SECTION 13 — App Policy, Guard-native UI, and Embedded Tools
+## 🧩 SECTION 8 — App Policy, Guard-native UI, and Embedded Tools
 
 **User:**  
 And for the apps — will we adapt also open-source existing ones? Or should we make new/nicer/better ones?
@@ -882,7 +874,7 @@ Long-term, Aegis can optionally compare **local model vs cloud model** for verif
 
 ---
 
-## 🌐 SECTION 14 — GuardOS-R (Router Edition) and GuardRouter Devices
+## 🌐 SECTION 9 — GuardOS-R (Router Edition) and GuardRouter Devices
 
 **User:**  
 GuardOS will be suitable for router purposes also? Or does it need supplementary settings or apps? Should it be simplified for a router version?
@@ -953,7 +945,7 @@ This makes GuardOS not just a personal OS — but a **complete physical product 
 ---
 ---
 
-## 💸 SECTION 15 — Ecosystem Growth, Monetization, Community & Long-Term Vision
+## 💸 SECTION 10 — Ecosystem Growth, Monetization, Community & Long-Term Vision
 
 **User:**  
 So what are the possible ways to monetize this? And how would the community grow?
