@@ -17,3 +17,17 @@ Thank you for helping secure users worldwide.
 
 ## Reproducible Builds
 See [REPRODUCIBLE_BUILDS](docs/REPRODUCIBLE_BUILDS.md). PRs should not break determinism.
+
+## Licensing & Forks
+
+GuardOS is released under the GNU General Public License v3.0 (GPLv3).
+
+All contributors agree that:
+
+- Any public forks or derivative works **must retain attribution** to the original author:  
+  (`github.com/juanitto-maker`)
+- The original project name “**GuardOS**” may not be reused in derivative forks **without written permission**
+- The README of any public fork must include a clear notice stating:  
+  _“This project is based on GuardOS by juanitto-maker (https://github.com/juanitto-maker/GuardOS)”_
+
+This clause is meant to **preserve authorship, protect integrity**, and encourage fair open-source collaboration.
