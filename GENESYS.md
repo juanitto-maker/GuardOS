@@ -675,3 +675,52 @@ You should ideally begin with **X230** — best balance of:
 - Real-world threat modeling
 
 ---
+
+---
+
+##  SECTION 11 — Hardware Compatibility Expansion
+
+**User:**  
+Continue (but add some references or details about other suitable devices even though I chose X230 — it can still be useful for readers): T-series flagship T480, EliteBook, and maybe a table of which are compatible with Coreboot, and which with Libreboot.
+
+**Assistant:**  
+Absolutely. Here’s the expanded hardware section, giving readers a clear compatibility matrix and insights into other worthy devices:
+
+---
+
+###  Compatible Devices for GuardOS Development
+
+| Device               | Coreboot Support    | Libreboot Support    | Notes |
+|----------------------|---------------------|-----------------------|-------|
+| **ThinkPad X230**     |  Fully supported     |  Fully supported       | Gold-standard: ME removable, mature support, baseline device choice |
+| **ThinkPad T480 / T480s** |  Supported (rebrand, requires blobs) 0 |  Supported (via Libreboot 20241206+) 1 | Modern TPM2, partial Coreboot, ME present but manageable |
+| **HP EliteBook 820 G2** |  Supported (mainline Coreboot added 2023) 2 |  Possibly (not mainline Libreboot yet) | Business class, available used, reputably stable |
+| **HP EliteBook 2170p** |  Supported (Coreboot mainline + Libreboot) 3 |  Supported (Libreboot patch added) | Compact unit with open firmware support |
+| **HP EliteBook 9470m / 2560p / Folio 9470m** |  Partial / experimental Coreboot support |  Supported (Libreboot) 4 | Sandy/Ivy Bridge hardware well-suited to libre tools |
+| **Framework Laptop**   |  Limited (vendor-led) |  Not supported | Excellent modern hardware, customizable but not Libreboot-ready |
+| **Pinebook Pro**       |  Community boards (ARM support) |  Not supported | ARM-based, open firmware-friendly; good for GuardOS-R prototypes |
+| **Modern ThinkPads (e.g., X1 Carbon)** |  No support (ME locked, EC locked) |  No support | Not recommended due to closed firmware |
+
+---
+
+###  Hardware Selection Notes
+
+- **X230 remains the flagship reference** due to its balance of openness, flashability, price, and Linux compatibility.
+- **T480** is acceptable for more modern specs, with Coreboot support (with vendor blobs) and recent Libreboot availability 5.
+- **HP EliteBook models** provide a retro-business alternative:  
+  - 820 G2 has Coreboot support (needs blobs) 6.  
+  - 2170p is supported by both Coreboot and Libreboot 7.  
+  - Folio and 2560p have Libreboot support 8.
+- **Framework Laptop** is flexible and hackable but not open-firmware by default.
+- **Pinebook Pro** (ARM64) is fine for router variants or minimal desktop uses.
+
+---
+
+###  Reference Resources
+
+- *Coreboot status page* — check model-level support regularly.
+- *Libreboot’s hardware page* — lists fully libre-supported systems, mostly old ThinkPads & EliteBooks 9.
+
+---
+
+This gives contributors clear guidance: whether for initial X230-based development, modern specs with T480, or alternative devices for specific builds. Let me know when you’d like **Chunk 8** — covering app strategy, GUI profiles (Guess, Sway/Wayland), or the Guard Panel details!10
