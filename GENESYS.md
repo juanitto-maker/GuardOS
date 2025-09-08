@@ -807,3 +807,75 @@ Say **“Continue literal genesis part 1 (chunk 8)”** when ready — next we'l
 - GuardPanel
 - SafeView
 - Local AI agents (Aegis) vs cloud
+
+---
+
+## 🧩 SECTION 13 — App Policy, Guard-native UI, and Embedded Tools
+
+**User:**  
+And for the apps — will we adapt also open-source existing ones? Or should we make new/nicer/better ones?
+
+**Assistant:**  
+Great question — and it's a design choice that affects UX, security, and development speed.
+
+---
+
+### 🧱 GuardOS App Strategy
+
+| Type          | Source | Policy |
+|---------------|--------|--------|
+| **Core system tools** | Custom (Rust/GTK) | Must be built-for-purpose, signed, offline-first |
+| **Everyday apps** | Hardened Flatpaks | Only audited & sandboxed bundles |
+| **Power tools / Dev apps** | Optional | Run in micro‑VM if elevated trust needed |
+| **Legacy tools** | Blocked or wrapped | Unless isolated fully via `firejail`, `bwrap`, or VM |
+
+---
+
+## 📦 Default Apps List (GuardOS 1.0)
+
+| Purpose         | App                       | Notes |
+|-----------------|---------------------------|-------|
+| **File manager** | `nautilus` or `nemo` (Flatpak) | Sandbox-enforced |
+| **Web browser** | `ungoogled-chromium` / `Librewolf` | Flatpak + egress firewall |
+| **Terminal**     | `kgx` or `foot`           | No network by default |
+| **Editor**       | `lapce`, `zed`, or `kate` | Sandbox capable |
+| **PDF/Image View**| SafeView (custom)       | Rasterized only |
+| **Software install** | Flatseal / App Center (optional) | Curated whitelist only |
+| **Password manager** | Bitwarden / KeePassXC | TPM-sealed vault, optional WebAuthn |
+| **Media player** | Haruna / mpv             | No auto-network access |
+| **Updates**      | Nix rebuild, not GUI store | All system changes must be declarative |
+
+---
+
+### 🛡️ Guard-native Apps (Custom-Built)
+
+| App          | Function |
+|--------------|----------|
+| **GuardPanel** | Live audit overlay: process alerts, USB events, sandbox state, firewall |
+| **SafeView**    | Opens PDFs/images/scripts in a non-executable, non-network sandbox |
+| **Aegis**       | Local LLM-based advisor, explains alerts and flags risky behavior |
+| **Hunter UI**   | Traps, fake tokens, beacon alerts, forensic export |
+| **Setup Wizard**| Secure onboarding (with TPM attestation + FIDO2 test) |
+
+These apps would be written in:
+- **Rust** (security + performance)
+- **GTK4 / libadwaita** (Wayland-native UI)
+- Optional **Tauri** or **Yew** (if we want web-style interface)
+
+---
+
+### 🧠 Aegis: Embedded AI Agent
+
+Aegis is the **on-device LLM watchdog + guide**.
+
+It does:
+- Explain alerts in plain English:  
+  > “This USB device injected keystrokes — possible Rubber Ducky.”  
+- Classify behaviors: phishing, DGA, exfiltration patterns  
+- Help users decide:  
+  > “Should I allow this Flatpak access to my Documents folder?”  
+- Local-only by default (using quantized 3–7B model)
+
+Long-term, Aegis can optionally compare **local model vs cloud model** for verification — **GuardOS never sends data unless explicitly approved**.
+
+---
