@@ -752,19 +752,6 @@ Absolutely — here’s your X230 checklist for GuardOS readiness:
 ---
 
 **User:**  
-[uploaded image proof of listing]  
-Can I use it with my 12V 50Ah battery?
-
-**Assistant:**  
-Yes — with a proper **12V-to-20V boost converter** (like 12V→20V 65W regulated step-up), you can power an X230 from your 12V 50Ah battery.
-
-✅ Use a **DC5525 to Lenovo square plug** adapter.  
-✅ Add inline **5A fuse** and voltage cutoff if possible.  
-❌ Don’t feed 12V directly — X230 expects ~20V input.
-
----
-
-**User:**  
 But do you think you're able to code such an OS as GuardOS?!?
 
 **Assistant:**  
