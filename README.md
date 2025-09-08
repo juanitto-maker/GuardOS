@@ -38,3 +38,5 @@ This is an early, community‑led project. Expect rapid iteration. Join us in di
 
 ## License
 See [LICENSE](LICENSE). SPDX: GPL-3.0-or-later
+
+[![Donate](https://img.shields.io/badge/Donate-Ko--fi-blueviolet?logo=ko-fi)](https://ko-fi.com/guardos)
