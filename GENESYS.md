@@ -719,6 +719,7 @@ Absolutely. Here’s the expanded hardware section, giving readers a clear compa
 ###  Reference Resources
 
 - *Coreboot status page* — check model-level support regularly.
+  https://doc.coreboot.org/mainboard/index.html
 - *Libreboot’s hardware page* — lists fully libre-supported systems, mostly old ThinkPads & EliteBooks 9.
   https://libreboot.org/docs/install/#thinkpads
 ---
