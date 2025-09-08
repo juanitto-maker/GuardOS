@@ -1,5 +1,4 @@
-[![Donate via Ko-fi](https://img.shields.io/badge/Donate-Ko--fi-blueviolet?logo=ko-fi)](https://ko-fi.com/guardos)
-[![Donate via PayPal](https://img.shields.io/badge/Donate-PayPal-blue?logo=paypal)](https://paypal.me/guardOS)
+[![Donate](https://img.shields.io/badge/Donate-Ko--fi-blueviolet?logo=ko-fi)](https://ko-fi.com/guardos)
 
 # GuardOS — AI‑Armored Personal Operating System (Open Source)
 
