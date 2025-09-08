@@ -1,5 +1,5 @@
 # Canonical model registry for GuardOS (text-only, no weights)
-# Each model includes metadata, quantization details, licensing, and Android compatibility notes.
+# Each entry includes metadata, quantization details, licensing, and system compatibility notes.
 
 models:
   - id: gemma-0.27b-q4km
@@ -8,7 +8,7 @@ models:
     size_params_b: 0.27
     quantizations:
       - file: gemma-0.27b-Q4_K_M.gguf
-        note: Balanced quality/size for mobile CPUs
+        note: Balanced quality/size for offline policy agents
     context: 2048
     runtime: [llama.cpp]
     licenses:
@@ -19,9 +19,9 @@ models:
       mirrors: []
     sha256:
       gemma-0.27b-Q4_K_M.gguf: "FILL_ME_IN_SHA256"
-    device_requirements:
-      ram_min_gb: 2
-      notes: "Good for control tasks, classification, short reasoning."
+    system_requirements:
+      min_ram_gb: 2
+      notes: "Good for classification, routing, and low-latency decision support."
 
   - id: tinyllama-1.1b-q4km
     display_name: TinyLlama 1.1B (Q4_K_M)
@@ -29,7 +29,7 @@ models:
     size_params_b: 1.1
     quantizations:
       - file: TinyLlama-1.1B-Chat-v1.0-Q4_K_M.gguf
-        note: Chat-tuned, runs on most phones
+        note: Chat-tuned, compact general-purpose model
     context: 2048
     runtime: [llama.cpp]
     licenses:
@@ -40,9 +40,9 @@ models:
       mirrors: []
     sha256:
       TinyLlama-1.1B-Chat-v1.0-Q4_K_M.gguf: "FILL_ME_IN_SHA256"
-    device_requirements:
-      ram_min_gb: 3
-      notes: "Fast enough for lightweight chat & guidance."
+    system_requirements:
+      min_ram_gb: 3
+      notes: "Handles small chat-style flows, summaries, simple question answering."
 
   - id: qwen1.5-0.5b-q4km
     display_name: Qwen 1.5‑0.5B (Q4_K_M)
@@ -50,7 +50,7 @@ models:
     size_params_b: 0.5
     quantizations:
       - file: Qwen1.5-0.5B-Chat-Q4_K_M.gguf
-        note: Small, decent reasoning for brief tasks
+        note: Reasonable performance for short prompts
     context: 2048
     runtime: [llama.cpp]
     licenses:
@@ -61,9 +61,9 @@ models:
       mirrors: []
     sha256:
       Qwen1.5-0.5B-Chat-Q4_K_M.gguf: "FILL_ME_IN_SHA256"
-    device_requirements:
-      ram_min_gb: 2
-      notes: "Useful for command routing and summaries."
+    system_requirements:
+      min_ram_gb: 2
+      notes: "Best used for routing prompts, config helpers, and short completions."
 
   - id: phi-2-2.7b-q4km
     display_name: Phi‑2 2.7B (Q4_K_M)
@@ -71,7 +71,7 @@ models:
     size_params_b: 2.7
     quantizations:
       - file: Phi-2-Q4_K_M.gguf
-        note: Heavier; better language quality, slower on CPU
+        note: Good accuracy for short tasks; heavier runtime
     context: 2048
     runtime: [llama.cpp]
     licenses:
@@ -82,12 +82,12 @@ models:
       mirrors: []
     sha256:
       Phi-2-Q4_K_M.gguf: "FILL_ME_IN_SHA256"
-    device_requirements:
-      ram_min_gb: 4
-      notes: "Good quality for small model; expect slower tokens/s."
+    system_requirements:
+      min_ram_gb: 4
+      notes: "Better generation quality; useful for offline assistants and summaries."
 
 # Global notes
 notes:
-  - "GuardOS does not ship model files. Users fetch from official sources and verify SHA256."
-  - "Prefer GGUF quantizations for llama.cpp on Android."
-  - "Update sha256 hashes when you standardize on specific builds."
+  - "GuardOS does not ship model files. Users fetch them manually and verify SHA256."
+  - "All models must support GGUF and run locally. No remote API inference."
+  - "Runtime support starts with llama.cpp but may extend to others if policy-compliant."
