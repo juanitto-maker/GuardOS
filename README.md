@@ -40,8 +40,6 @@ Want to understand how GuardOS was born, the philosophy behind it, and how the o
 Read the full literal transcript here:  
 👉 [**GENESYS.md**](./GENESYS.md) — *GuardOS Genesis Log: Literal Transcript*
 
-> 💡 Only private purchase info was redacted. Everything else is verbatim to give contributors full context.
-
 ## Status
 This is an early, community‑led project. Expect rapid iteration. Join us in discussions and issues.
 
