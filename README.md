@@ -36,14 +36,12 @@ Traditional security focuses on the perimeter. Modern attacks move across layers
 ## Status
 This is an early, community‑led project. Expect rapid iteration. Join us in discussions and issues.
 
----
-
 ## 💬 Community & Support
 
 Want to ask questions, share ideas, or get help with GuardOS?
 
-Join the official GitHub Discussions:
-👉 [github.com/juanitto-maker/GuardOS/discussions](https://github.com/juanitto-maker/GuardOS/discussions)
+Join the official GitHub Discussions:  
+👉 **[GuardOS Discussions](https://github.com/juanitto-maker/GuardOS/discussions)**
 
 This is the place to:
 - Ask for help or clarification
