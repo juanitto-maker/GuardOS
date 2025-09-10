@@ -289,49 +289,77 @@ Each layer assumes the lower layers could be compromised and defends against the
 
 GuardOS reduces a vast majority of known attack vectors, but **no OS can eliminate all risk**. The following remain challenges:
 
-| Risk | Reason |
-|------|--------|
-| Hardware implants in SoCs or Wi-Fi | Requires trusted fabrication and auditing |
-| Spectre/Meltdown-like side-channels | Mitigated, but not fully eliminated |
-| Embedded baseband backdoors (on phones) | Not relevant for PC version; mobile variant must isolate |
-| Human phishing or coercion | Education only |
-| Attacks via unvetted hardware | User must buy from trusted vendors |
+| Risk                                    | Reason                                           |
+|-----------------------------------------|--------------------------------------------------|
+| Hardware implants in SoCs or Wi-Fi      | Requires trusted fabrication & open hardware     |
+| Spectre/Meltdown-like side-channels     | Partially mitigated by microcode & kernel flags |
+| Baseband backdoors (on phones)          | Avoided by no baseband in PC builds              |
+| Human phishing or coercion              | Not solvable by OS alone                         |
+| Attacks via unvetted third-party parts  | User must select trusted vendors                 |
 
 ---
 
 ## 🚧 15. Future Work
 
-GuardOS is a living security architecture. The following enhancements are being considered:
+GuardOS is a living security architecture. The following enhancements are under consideration:
 
-- ✅ Coreboot + Heads integration for all supported laptops
-- ✅ Reproducible ISO builds for community verification
+- ✅ Coreboot + Heads support on all compatible laptops
+- ✅ Fully reproducible ISO builds with hash transparency
 - ✅ Optional **air-gap mode** with no network stack
-- ✅ “Guardian Assistant” CLI: audit your system security state
-- ✅ Integration with OnlyKey/YubiKey for system unlock
-- ✅ GuardPhone edition with hardened cellular design
+- ✅ `guardian-cli` for audit/self-check of system security
+- ✅ OnlyKey/YubiKey integration for unlocking & 2FA
+- ✅ Mobile variant (GuardPhone) with hardened baseband
 
 ---
 
-## 📘 16. Further Reading
+## 🧠 16. Security Philosophy
+
+GuardOS is built around these principles:
+
+- 🔐 **User-first, not vendor-first** — the system belongs to you, not to OEMs or cloud providers.
+- 🪶 **Minimalism = Security** — fewer apps and services = fewer vulnerabilities.
+- 🧱 **Immutable and auditable** — signed boot, reproducible builds, tamper detection.
+- 🔎 **No surveillance AI** — no Copilot, no Recall, no background screen scanning.
+- 🛑 **Zero trust by default** — even system daemons are sandboxed.
+
+We believe true security requires visibility, control, and *intentional simplicity*.
+
+---
+
+## 📊 17. Comparison to Other Secure OSes
+
+| Feature                             | GuardOS | QubesOS | GrapheneOS |
+|-------------------------------------|---------|---------|------------|
+| Hardware BIOS flashing supported    | ✅ Yes  | ✅ Yes  | ⚠️ Partial |
+| Heads/TPM verified boot             | ✅ Yes  | ✅ Yes  | ❌ No      |
+| Sandboxed apps                      | ✅ Yes  | ✅ Yes  | ✅ Yes     |
+| App permissions & mic/cam toggles   | ✅ Yes  | ⚠️ Mixed | ✅ Yes     |
+| Integrated AI surveillance          | ❌ None | ❌ None | ❌ None    |
+| Local-only LLM tools (optional)     | ✅ Yes  | ❌ No   | ❌ No      |
+| Target device                       | 🖥 PC   | 🖥 PC   | 📱 Mobile  |
+
+---
+
+## 📘 18. Further Reading
 
 - [Libreboot project](https://libreboot.org/)
 - [me_cleaner](https://github.com/corna/me_cleaner)
 - [QubesOS Threat Model](https://www.qubes-os.org/security/)
-- [Pegasus Project - Forensic Methodology Report (Amnesty)](https://www.amnesty.org/en/latest/research/2021/07/forensic-methodology-report-how-to-catch-nso-group-pegasus/)
+- [Pegasus Forensic Report (Amnesty)](https://www.amnesty.org/en/latest/research/2021/07/forensic-methodology-report-how-to-catch-nso-group-pegasus/)
 
 ---
 
-## ✅ 17. Conclusion
+## ✅ 19. Conclusion
 
 GuardOS is designed to be:
 
-- Secure by architecture,
-- Private by policy,
-- Modular by design.
+- 🔐 Secure by architecture  
+- 🧠 Private by principle  
+- 🧱 Modular by design  
 
-Through layered defenses, sane defaults, and hardware best practices, GuardOS brings **military-grade defenses** to everyday users — without surveillance, telemetry, or trust in invisible actors.
+By combining hardened open-source software with vetted hardware and zero surveillance tooling, GuardOS brings military-grade protection to everyday users — while respecting freedom and transparency.
 
-We welcome community reviews, threat audits, and contributions.
+We invite ethical hackers, security researchers, and concerned citizens to audit, contribute, and strengthen GuardOS.
 
 > “Security is not a product — it’s a practice.”  
 > — GuardOS Core Team
