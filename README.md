@@ -43,6 +43,19 @@ Read the full literal transcript here:
 ## Status
 This is an early, community‑led project. Expect rapid iteration. Join us in discussions and issues.
 
+## 🔐 Security Model
+
+GuardOS is built with a comprehensive, layered defense architecture known as the **Onion Security Model**, tackling modern threats such as:
+
+- Physical device seizure & forensic extraction (e.g., GreyKey)
+- Remote 0-click malware (e.g., Pegasus)
+- Firmware/BIOS-level implants
+- TLS interception and certificate injection
+- AI-based surveillance (e.g., Recall, Copilot, Gemini)
+- Stalkerware, USB malware, SS7 modem exploits
+
+👉 **[Read the full GuardOS Security Model →](./SECURITY_MODEL.md)**
+
 ## 💬 Community & Support
 
 Want to ask questions, share ideas, or get help with GuardOS?
