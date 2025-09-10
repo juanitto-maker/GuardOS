@@ -1,0 +1,73 @@
+# GuardOS Profile: Minimal Baseline
+# This profile defines the most stripped-down secure configuration for bootstrapping GuardOS.
+# It disables networking by default, enforces local-only AI, and enables core system protections.
+
+profile_id: "minimal"
+description: "Minimal secure GuardOS configuration. No networking. Local AI only. For bootstrapping & offline use."
+
+system:
+  hostname: "guardos-minimal"
+  timezone: "UTC"
+  locale: "en_US.UTF-8"
+  autologin: false
+  default_shell: "/bin/bash"
+
+network:
+  enabled: false
+  interfaces: []
+  dns: []
+  firewall:
+    enabled: true
+    rules: []
+
+users:
+  - username: "operator"
+    uid: 1000
+    groups: [wheel, sudo]
+    shell: "/bin/bash"
+    home: "/home/operator"
+    ssh_keys: []   # no remote access by default
+
+ai:
+  enabled: true
+  mode: local
+  model_id: "gemma-0.27b-q4km"
+  runtime: "llama.cpp"
+  consent_required: true
+  policies:
+    safety: "ai/policies/safety.yaml"
+    tools: "ai/policies/tool_rules.yaml"
+  logging:
+    enable_transcripts: true
+    redact_pii: true
+    rotate_days: 14
+
+tools:
+  read_file: true
+  run_command: false         # explicitly disabled in minimal profile
+  write_file: false
+  search_logs: true
+  hash_file: true
+
+filesystem:
+  mount_tmpfs_on_tmp: true
+  noexec_on_home: true
+  ro_root_possible: true
+
+guardpanel:
+  enabled: true
+  prompt: "ai/prompts/guardpanel/base.md"
+  startup_message: |
+    GuardPanel is running in local-only mode.
+    No data leaves the machine. All outputs are generated securely offline.
+
+boot:
+  services:
+    - name: guardpanel
+      enabled: true
+    - name: auditd
+      enabled: true
+    - name: firewall
+      enabled: true
+    - name: sshd
+      enabled: false
