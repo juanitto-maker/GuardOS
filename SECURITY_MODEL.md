@@ -4,6 +4,8 @@
 > Maintainer: GuardOS Core Team  
 > License: GNU GPLv3
 
+> 🧅 See also: [Onion Architecture Deep-Dive](docs/SECURITY_MODEL_ONION.md) for a layered breakdown of GuardOS security layers.
+
 This document outlines the comprehensive security model of **GuardOS** — a secure-by-design operating system built for hardened, user-owned computing. It details:
 
 - What attack vectors GuardOS protects against by default.
