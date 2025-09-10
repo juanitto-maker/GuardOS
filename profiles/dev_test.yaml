@@ -1,0 +1,76 @@
+# GuardOS Profile: Dev-Test
+# Purpose: Safe-but-flexible profile for local development and testing of GuardOS tools.
+# - Keeps AI in Local mode.
+# - Allows read/search/hash tools by default.
+# - Enables `run_command` with explicit user consent.
+# - Networking remains disabled to preserve offline guarantees during testing.
+
+profile_id: "dev-test"
+description: "Developer testing profile. Local-only AI. Networking disabled. Command execution allowed with consent."
+
+system:
+  hostname: "guardos-dev"
+  timezone: "UTC"
+  locale: "en_US.UTF-8"
+  autologin: false
+  default_shell: "/bin/bash"
+
+network:
+  enabled: false
+  interfaces: []
+  dns: []
+  firewall:
+    enabled: true
+    rules: []
+
+users:
+  - username: "operator"
+    uid: 1000
+    groups: [wheel, sudo]
+    shell: "/bin/bash"
+    home: "/home/operator"
+    ssh_keys: []   # keep remote access off by default
+
+ai:
+  enabled: true
+  mode: local
+  model_id: "tinyllama-1.1b-q4km"
+  runtime: "llama.cpp"
+  consent_required: true
+  policies:
+    safety: "ai/policies/safety.yaml"
+    tools: "ai/policies/tool_rules.yaml"
+  logging:
+    enable_transcripts: true
+    redact_pii: true
+    rotate_days: 14
+
+tools:
+  read_file: true
+  run_command: true         # Enabled here for dev; requires consent at runtime
+  write_file: false
+  search_logs: true
+  hash_file: true
+
+filesystem:
+  mount_tmpfs_on_tmp: true
+  noexec_on_home: true
+  ro_root_possible: true
+
+guardpanel:
+  enabled: true
+  prompt: "ai/prompts/guardpanel/base.md"
+  startup_message: |
+    GuardPanel (dev-test) is running in local-only mode.
+    Command execution is allowed but requires explicit consent.
+
+boot:
+  services:
+    - name: guardpanel
+      enabled: true
+    - name: auditd
+      enabled: true
+    - name: firewall
+      enabled: true
+    - name: sshd
+      enabled: false
