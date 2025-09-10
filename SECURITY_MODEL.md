@@ -1,4 +1,4 @@
-# 🛡️ GuardOS Security Model
+# # 🛡️ GuardOS Security Model
 
 > Last updated: 2025-09-10  
 > Maintainer: GuardOS Core Team  
@@ -17,35 +17,42 @@ This document outlines the comprehensive security model of **GuardOS** — a sec
 
 GuardOS is built using an **onion-layer model** of security:
 
-| Layer | Description |
-|-------|-------------|
-| 🔐 Core Boot | Coreboot/Libreboot firmware, Heads, TPM integrity |
-| 🧬 Kernel & Init | Hardened Linux kernel, signed init, immutable root |
-| 🧱 System Services | Sandboxed system daemons, verified package updates |
-| 🗂️ User Space | Minimal default apps, zero telemetry, strict permissions |
-| 🌐 Network | VPN-first, DNS filtering, no untrusted certs |
-| 🤖 AI / Surveillance | No built-in screen reading, local-only LLMs |
-| 🧠 User Behavior | Security education, minimal attack surface |
+```
+🧠 User Behavior
+  ⇧
+🤖 AI (local-only, no surveillance)
+  ⇧
+🌐 Network (VPN, firewall, no cert injection)
+  ⇧
+🗂️ User Space (sandboxed apps, permissions)
+  ⇧
+🧱 System Services (signed daemons, no telemetry)
+  ⇧
+🧬 Kernel & Init (immutable, signed boot)
+  ⇧
+🔐 Core Boot (Libreboot/Coreboot, TPM, Heads)
+```
+
+Each layer assumes the lower layers could be compromised and defends against them.
 
 ---
 
 ## 🧷 2. Summary Table — Threat Categories vs GuardOS Coverage
 
-| Category | GuardOS Protection | Supplementary Measures |
-|----------|---------------------|--------------------------|
-| Physical extraction (GreyKey) | ✅ Full disk encryption | Use strong passphrase, enable TPM |
-| Post-seizure malware (evil maid) | ✅ Verified boot & alerts | Enable Heads with external validation |
-| Remote exploits (0-click, Pegasus) | ✅ Minimal surface, hardened apps | Stay updated, avoid risky apps |
-| Modem/SS7 attacks | ✅ Not applicable (no baseband) | Use modemless hardware |
-| Certificate injection (MITM) | ✅ CA pinning, no injected roots | Don’t install third-party AVs |
-| Firmware/BIOS backdoors | ⚠️ Partially mitigated | Flash Coreboot/Libreboot |
-| Supply chain backdoors | ⚠️ Limited | Buy vetted hardware, check hashes |
-| Spyware apps / Stalkerware | ✅ No app store, sandboxed apps | Limit permissions |
-| AI screen surveillance | ✅ Disabled by design | Don’t install Copilot/Gemini |
-| Radio spying (IMSI/Stingray) | ✅ No cellular stack | Airplane mode, remove WWAN card |
-| USB malware / BadUSB | ✅ Mount controls, no autorun | Avoid untrusted USBs |
-| User error (phishing, social) | ❌ Not OS-solvable | Security education only |
-
+| Category                           | GuardOS Protection | Supplementary Measures                      |
+|------------------------------------|---------------------|----------------------------------------------|
+| Physical extraction (GreyKey)      | ✅ Full disk encryption | Use strong passphrase, enable TPM           |
+| Post-seizure malware (evil maid)   | ✅ Verified boot & alerts | Enable Heads with USB/GPG validation    |
+| Remote exploits (0-click, Pegasus) | ✅ Minimal attack surface | Avoid risky apps, stay updated            |
+| Modem/SS7 attacks                  | ✅ Not applicable (no baseband) | Use modemless hardware or disable radios |
+| Certificate injection (MITM)       | ✅ CA pinning, no AV certs | Avoid installing untrusted apps           |
+| Firmware/BIOS backdoors            | ⚠️ Partially mitigated | Flash Coreboot/Libreboot, disable ME       |
+| Supply chain backdoors             | ⚠️ Limited          | Buy vetted hardware, hash verification     |
+| Spyware / Stalkerware apps         | ✅ Sandboxed apps   | Limit permissions, audit apps regularly     |
+| AI screen surveillance             | ✅ Disabled by design | No Copilot, no Recall                      |
+| IMSI/Stingray radio spying         | ✅ No cellular radios | Remove WWAN cards, use MAC randomization    |
+| USB malware / BadUSB               | ✅ No autorun, mount control | Avoid unknown USBs                    |
+| User error / phishing              | ❌ Not OS-solvable | Train user, use password managers          |
 ---
 
 ## 🔓 3. Physical Access Attacks
