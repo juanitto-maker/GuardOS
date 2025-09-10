@@ -1,0 +1,181 @@
+{
+  "$schema": "https://json.schemastore.org/json",
+  "name": "GuardPanel Tool Manifest",
+  "version": "0.1",
+  "description": "Declarative list of tools GuardPanel may request, mapped to local CLI handlers. Must comply with ai/policies/safety.yaml and ai/policies/tool_rules.yaml.",
+  "mode_behavior": {
+    "local": {
+      "network_access": "deny",
+      "execution": "consent-required"
+    },
+    "hybrid": {
+      "network_access": "guard-tunnel-only",
+      "execution": "consent-required"
+    },
+    "cloud": {
+      "network_access": "guard-tunnel-only",
+      "execution": "dry-run-by-default"
+    }
+  },
+  "tools": [
+    {
+      "name": "read_file",
+      "title": "Read File (Redacted)",
+      "purpose": "Read a text file from disk with basic redaction of secrets/PII before returning to the user.",
+      "command": "bash guardos/guardpanel/cli.sh read-file {{path}}",
+      "requires_explicit_path": true,
+      "consent_required": false,
+      "allowed_in_modes": ["local", "hybrid", "cloud"],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "path": { "type": "string", "description": "Absolute or ~ path to a readable text file" }
+        },
+        "required": ["path"]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "text": { "type": "string" }
+        },
+        "required": ["text"]
+      }
+    },
+    {
+      "name": "list_dir",
+      "title": "List Directory",
+      "purpose": "List entries in a directory for navigation and discovery.",
+      "command": "bash guardos/guardpanel/cli.sh list-dir {{path}}",
+      "requires_explicit_path": true,
+      "consent_required": false,
+      "allowed_in_modes": ["local", "hybrid", "cloud"],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "path": { "type": "string", "description": "Absolute or ~ directory path" }
+        },
+        "required": ["path"]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "entries": { "type": "array", "items": { "type": "string" } }
+        },
+        "required": ["entries"]
+      }
+    },
+    {
+      "name": "hash_file",
+      "title": "SHA256 Hash",
+      "purpose": "Compute SHA256 of a file for integrity checks and supply-chain verification.",
+      "command": "bash guardos/guardpanel/cli.sh hash-file {{path}}",
+      "requires_explicit_path": true,
+      "consent_required": false,
+      "allowed_in_modes": ["local", "hybrid"],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "path": { "type": "string" }
+        },
+        "required": ["path"]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "sha256": { "type": "string" }
+        },
+        "required": ["sha256"]
+      }
+    },
+    {
+      "name": "search_logs",
+      "title": "Search Logs",
+      "purpose": "Search GuardOS logs for a regex pattern with line numbers.",
+      "command": "bash guardos/guardpanel/cli.sh search-logs {{glob}} {{regex}}",
+      "requires_explicit_path": true,
+      "consent_required": false,
+      "allowed_in_modes": ["local", "hybrid"],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "glob": { "type": "string", "description": "Glob for log files (e.g., /var/log/*.log)" },
+          "regex": { "type": "string", "description": "ECMAScript/grep-compatible regex" }
+        },
+        "required": ["glob", "regex"]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "results": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "file": { "type": "string" },
+                "line": { "type": "integer" },
+                "snippet": { "type": "string" }
+              },
+              "required": ["file", "line", "snippet"]
+            }
+          }
+        },
+        "required": ["results"]
+      }
+    },
+    {
+      "name": "run_command",
+      "title": "Run Command (Consent)",
+      "purpose": "Preview a shell command and, if user consents, execute it with output capture.",
+      "command": "bash guardos/guardpanel/cli.sh run {{command}}",
+      "requires_explicit_path": false,
+      "consent_required": true,
+      "allowed_in_modes": ["local", "hybrid"],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "command": { "type": "string", "description": "Exact shell command to preview and possibly execute" }
+        },
+        "required": ["command"]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "preview": { "type": "string" },
+          "executed": { "type": "boolean" },
+          "stdout": { "type": "string" },
+          "stderr": { "type": "string" },
+          "exit_code": { "type": "integer" }
+        },
+        "required": ["preview", "executed"]
+      }
+    },
+    {
+      "name": "summarize_file",
+      "title": "Summarize File (Local AI)",
+      "purpose": "Create a concise summary of a file using local AI (or a stub until a local runtime is wired).",
+      "command": "bash guardos/guardpanel/cli.sh summarize-file {{path}}",
+      "requires_explicit_path": true,
+      "consent_required": false,
+      "allowed_in_modes": ["local"],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "path": { "type": "string" }
+        },
+        "required": ["path"]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "summary": { "type": "string" }
+        },
+        "required": ["summary"]
+      }
+    }
+  ],
+  "notes": [
+    "All tools are subject to policies in ai/policies/safety.yaml and ai/policies/tool_rules.yaml.",
+    "Consent is strictly enforced for run_command and any filesystem writes.",
+    "No network tools are exposed in local mode."
+  ]
+}
