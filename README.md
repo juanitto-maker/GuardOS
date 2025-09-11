@@ -89,6 +89,23 @@ We're building GuardOS together — your input is welcome!
   - Lightweight local AI (LLM or rule-based)
   - NixOS module refinement and packaging
 
+📍 See full [ROADMAP.md →](https://github.com/juanitto-maker/GuardOS/blob/main/ROADMAP.md)
+
+- ✅ v0.1: Core architecture, SECURITY_MODEL.md, and Aegis AI concept drafted
+- ✅ Reference hardware selected: ThinkPad X230, T480, Framework 13
+- ✅ Community feedback loop started (Reddit + GitHub)
+- 🔄 v0.2: Nix flake + profiles under development (`profiles/dev-test.yaml`)
+- 🔄 v0.2: Flatpak sandboxing + per-app firewall config ongoing
+- 🔄 v0.2: Contributor onboarding docs being drafted
+- 🧪 v0.3: QEMU bootable ISO in planning stage
+- 🧠 Looking for contributors on:
+  - Aegis watchdog shell scripting (detection + logging)
+  - Flatpak sandbox and firewall testing
+  - Installer polish (`build.sh`)
+  - Real-device reproducibility feedback
+
+---
+
 ---
 
 ## 🤝 How to Contribute
