@@ -75,7 +75,38 @@ We're building GuardOS together — your input is welcome!
 
 [![Security](https://img.shields.io/badge/security-GitHub%20Advanced-blue?logo=github)](../../security/policy)
 
+---
 
+## 🚧 Project Progress [Updated: Sept 12, 2025]
+
+- ✅ First base NixOS profile draft working
+- ✅ Initial architecture & SECURITY_MODEL.md published
+- ✅ Community discussions started (Reddit, GitHub)
+- 🔄 Flatpak sandboxing layer – work in progress
+- 🔄 LLM watchdog shell layer – concepts + first scripts
+- 🧠 Looking for contributors on:
+  - Watchdog shell scripting
+  - Lightweight local AI (LLM or rule-based)
+  - NixOS module refinement and packaging
+
+---
+
+## 🤝 How to Contribute
+
+You **don’t need to be a Nix guru** — GuardOS welcomes help from all security-minded devs.
+
+### Good first tasks:
+- Improve the installer (`build.sh`)
+- Write or test watchdog scripts (Bash/Python)
+- Suggest new security hardening techniques
+- Test reproducibility on real hardware
+- Translate documentation
+
+Check [issues](https://github.com/juanitto-maker/GuardOS/issues) labeled `good first issue` or [open a discussion](https://github.com/juanitto-maker/GuardOS/discussions).
+
+---
+
+☕ Like it? Support the project at [ko-fi.com/guardos](https://ko-fi.com/guardos)
 
 ## License
 See [LICENSE](LICENSE). SPDX: GPL-3.0-or-later
