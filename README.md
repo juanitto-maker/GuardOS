@@ -96,8 +96,6 @@ We're building GuardOS together — your input is welcome!
 
 ---
 
----
-
 ## 🤝 How to Contribute
 
 You **don’t need to be a Nix guru** — GuardOS welcomes help from all security-minded devs.
