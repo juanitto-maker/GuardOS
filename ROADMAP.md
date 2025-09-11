@@ -1,22 +1,25 @@
-# Roadmap (High-Level)
+## ✅ v0.1 – Conceptual Base
+- [x] Modular OS architecture using NixOS
+- [x] SECURITY_MODEL.md and onion-layer model drafted
+- [x] AI watchdog (Aegis) concept defined
+- [x] Community engagement started
+- [x] Initial hardware list (ThinkPad, Framework)
 
-**MVP (0.1)**
-- Immutable base (NixOS profile) + Secure Boot + TPM‑sealed disk
-- App sandboxing (Flatpak + portals) + per‑app firewall
-- Aegis AI (local anomaly + small local LLM for explainable prompts)
-- Basic Incident Response: app isolation, snapshots, rollback
-- Hardware Tier 1: Framework 13/16, ThinkPad T480/X270, MinisForum UM790
+## 🚧 v0.2 – Developer Kickstart
+- [ ] Starter NixOS profile via `build.sh`
+- [ ] Flatpak sandboxing testing
+- [ ] Contributor onboarding docs
+- [ ] Watchdog shell (detection + response)
+- [ ] Test matrix (QEMU + real hardware)
 
-**0.2**
-- Micro‑VMs for high‑risk apps (Firecracker/KVM)
-- Anti‑Evil‑Maid, attestation baselines
-- DNS anomaly + DGA detection, WireGuard profiles (Home/Travel/Untrusted)
+## 🔜 v0.3 – Secure + Usable Base
+- [ ] Micro‑VM isolation for risky apps
+- [ ] DNS anomaly + WireGuard switching
+- [ ] Attestation + anti‑evil‑maid prototype
+- [ ] Watchdog with explainable prompt logs
+- [ ] Local-only LLM (Gemma or Phi)
 
-**0.3**
-- Hunter Mode (honeypots, canary tokens, trap FS)
-- Client‑side encrypted backup + passkeys
-- Expanded hardware matrix + ARM64 beta
-
-**1.0**
-- Reproducible release pipeline (SLSA), Sigstore signing
-- Optional zero‑knowledge Guardian Cloud for threat intel sync
+## 🛡️ Future Milestones
+- [ ] Optional “Guardian Cloud”
+- [ ] Signed, reproducible builds (SLSA)
+- [ ] Expanded HW matrix (ARM64, mini-PCs)
