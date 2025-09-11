@@ -79,16 +79,6 @@ We're building GuardOS together — your input is welcome!
 
 ## 🚧 Project Progress [Updated: Sept 12, 2025]
 
-- ✅ First base NixOS profile draft working
-- ✅ Initial architecture & SECURITY_MODEL.md published
-- ✅ Community discussions started (Reddit, GitHub)
-- 🔄 Flatpak sandboxing layer – work in progress
-- 🔄 LLM watchdog shell layer – concepts + first scripts
-- 🧠 Looking for contributors on:
-  - Watchdog shell scripting
-  - Lightweight local AI (LLM or rule-based)
-  - NixOS module refinement and packaging
-
 📍 See full [ROADMAP.md →](https://github.com/juanitto-maker/GuardOS/blob/main/ROADMAP.md)
 
 - ✅ v0.1: Core architecture, SECURITY_MODEL.md, and Aegis AI concept drafted
